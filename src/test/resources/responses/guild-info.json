@@ -1,0 +1,15 @@
+{
+  "data": {
+    "avatar_url": "https://example.com/fixture",
+    "create_time": "2026-10-20 12:00:00",
+    "create_time_human": "2026-10-20 12:00:00",
+    "guild_id": "18446744073709551615",
+    "guild_number": "18446744073709551615",
+    "guild_type": "fixture",
+    "member_count": 1,
+    "name": "fixture",
+    "profile": "fixture",
+    "share_url": "https://example.com/fixture"
+  },
+  "success": true
+}

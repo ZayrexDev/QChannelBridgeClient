@@ -1,6 +1,9 @@
 package xyz.zcraft.qcb.client;
 
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import xyz.zcraft.qcb.client.response.*;
 import xyz.zcraft.qcb.client.request.*;
 
 import java.io.IOException;
@@ -114,500 +117,501 @@ public final class QChannelBridgeClient {
     /**
      * GET /api/guilds
      */
-    public ApiResponse getGuilds() {
-        return request("GET", "/guilds", empty());
+    public ApiResponse<GuildList> getGuilds() {
+        return request("GET", "/guilds", empty(), GuildList.class);
     }
 
     /**
      * POST /api/guilds
      */
-    public ApiResponse createGuild(CreateGuildRequest request) {
-        return request("POST", "/guilds", json(request));
+    public ApiResponse<OperationResult> createGuild(CreateGuildRequest request) {
+        return request("POST", "/guilds", json(request), OperationResult.class);
     }
 
     /**
      * GET /api/guilds/search
      */
-    public ApiResponse searchGuilds(String keyword, String scope, String nextPageToken) {
-        return request("GET", "/guilds/search", params("keyword", required(keyword, "keyword"), "scope", scope, "next_page_token", nextPageToken));
+    public ApiResponse<GuildSearchResult> searchGuilds(String keyword, String scope, String nextPageToken) {
+        return request("GET", "/guilds/search", params("keyword", required(keyword, "keyword"), "scope", scope, "next_page_token", nextPageToken), GuildSearchResult.class);
     }
 
-    public ApiResponse searchGuilds(String keyword) {
+    public ApiResponse<GuildSearchResult> searchGuilds(String keyword) {
         return searchGuilds(keyword, null, null);
     }
 
     /**
      * GET /api/shares/resolve
      */
-    public ApiResponse resolveShare(String url) {
-        return request("GET", "/shares/resolve", params("url", required(url, "url")));
+    public ApiResponse<ShareInfo> resolveShare(String url) {
+        return request("GET", "/shares/resolve", params("url", required(url, "url")), ShareInfo.class);
     }
 
     /**
      * GET /api/users/{tinyId}
      */
-    public ApiResponse getUserInfo(String tinyId) {
-        return request("GET", "/users/" + segment(tinyId), empty());
+    public ApiResponse<UserInfo> getUserInfo(String tinyId) {
+        return request("GET", "/users/" + segment(tinyId), empty(), UserInfo.class);
     }
 
     /**
      * GET /api/guilds/{guildId}
      */
-    public ApiResponse getGuildInfo(String guildId) {
-        return request("GET", "/guilds/" + segment(guildId), empty());
+    public ApiResponse<GuildInfo> getGuildInfo(String guildId) {
+        return request("GET", "/guilds/" + segment(guildId), empty(), GuildInfo.class);
     }
 
     /**
      * PATCH /api/guilds/{guildId}
      */
-    public ApiResponse updateGuildInfo(String guildId, String guildName, String guildProfile) {
-        return request("PATCH", "/guilds/" + segment(guildId), params("guild_name", guildName, "guild_profile", guildProfile));
+    public ApiResponse<OperationResult> updateGuildInfo(String guildId, String guildName, String guildProfile) {
+        return request("PATCH", "/guilds/" + segment(guildId), params("guild_name", guildName, "guild_profile", guildProfile), OperationResult.class);
     }
 
     /**
      * PUT /api/guilds/{guildId}/avatar
      */
-    public ApiResponse updateGuildAvatar(String guildId, String imagePath) {
-        return request("PUT", "/guilds/" + segment(guildId) + "/avatar", params("image_path", required(imagePath, "imagePath")));
+    public ApiResponse<OperationResult> updateGuildAvatar(String guildId, String imagePath) {
+        return request("PUT", "/guilds/" + segment(guildId) + "/avatar", params("image_path", required(imagePath, "imagePath")), OperationResult.class);
     }
 
     /**
      * PUT /api/guilds/{guildId}/number
      */
-    public ApiResponse updateGuildNumber(String guildId, String guildNumber) {
-        return request("PUT", "/guilds/" + segment(guildId) + "/number", params("guild_number", required(guildNumber, "guildNumber")));
+    public ApiResponse<OperationResult> updateGuildNumber(String guildId, String guildNumber) {
+        return request("PUT", "/guilds/" + segment(guildId) + "/number", params("guild_number", required(guildNumber, "guildNumber")), OperationResult.class);
     }
 
     /**
      * GET /api/guilds/{guildId}/share-url
      */
-    public ApiResponse getGuildShareUrl(String guildId) {
-        return request("GET", "/guilds/" + segment(guildId) + "/share-url", empty());
+    public ApiResponse<ShareLink> getGuildShareUrl(String guildId) {
+        return request("GET", "/guilds/" + segment(guildId) + "/share-url", empty(), ShareLink.class);
     }
 
     /**
      * GET /api/guilds/{guildId}/join-settings
      */
-    public ApiResponse getJoinSettings(String guildId) {
-        return request("GET", "/guilds/" + segment(guildId) + "/join-settings", empty());
+    public ApiResponse<GuildJoinSettings> getJoinSettings(String guildId) {
+        return request("GET", "/guilds/" + segment(guildId) + "/join-settings", empty(), GuildJoinSettings.class);
     }
 
     /**
      * PUT /api/guilds/{guildId}/join-settings
      */
-    public ApiResponse updateJoinSettings(String guildId, JoinSettings request) {
-        return request("PUT", "/guilds/" + segment(guildId) + "/join-settings", json(request));
+    public ApiResponse<OperationResult> updateJoinSettings(String guildId, JoinSettings request) {
+        return request("PUT", "/guilds/" + segment(guildId) + "/join-settings", json(request), OperationResult.class);
     }
 
     /**
      * POST /api/guilds/{guildId}/membership
      */
-    public ApiResponse joinGuild(String guildId, JoinGuildRequest request) {
-        return request("POST", "/guilds/" + segment(guildId) + "/membership", json(request));
+    public ApiResponse<OperationResult> joinGuild(String guildId, JoinGuildRequest request) {
+        return request("POST", "/guilds/" + segment(guildId) + "/membership", json(request), OperationResult.class);
     }
 
-    public ApiResponse joinGuild(String guildId) {
+    public ApiResponse<OperationResult> joinGuild(String guildId) {
         return joinGuild(guildId, new JoinGuildRequest(null, null));
     }
 
     /**
      * DELETE /api/guilds/{guildId}/membership
      */
-    public ApiResponse leaveGuild(String guildId) {
-        return request("DELETE", "/guilds/" + segment(guildId) + "/membership", empty());
+    public ApiResponse<OperationResult> leaveGuild(String guildId) {
+        return request("DELETE", "/guilds/" + segment(guildId) + "/membership", empty(), OperationResult.class);
     }
 
     /**
      * GET /api/guilds/{guildId}/members
      */
-    public ApiResponse getMembers(String guildId, String nextPageToken) {
-        return request("GET", "/guilds/" + segment(guildId) + "/members", params("next_page_token", nextPageToken));
+    public ApiResponse<MemberPage> getMembers(String guildId, String nextPageToken) {
+        return request("GET", "/guilds/" + segment(guildId) + "/members", params("next_page_token", nextPageToken), MemberPage.class);
     }
 
-    public ApiResponse getMembers(String guildId) {
+    public ApiResponse<MemberPage> getMembers(String guildId) {
         return getMembers(guildId, null);
     }
 
     /**
      * GET /api/guilds/{guildId}/members/search
      */
-    public ApiResponse searchMembers(String guildId, String keyword, Integer num, String nextPos) {
-        return request("GET", "/guilds/" + segment(guildId) + "/members/search", params("keyword", required(keyword, "keyword"), "num", num, "next_pos", nextPos));
+    public ApiResponse<MemberPage> searchMembers(String guildId, String keyword, Integer num, String nextPos) {
+        return request("GET", "/guilds/" + segment(guildId) + "/members/search", params("keyword", required(keyword, "keyword"), "num", num, "next_pos", nextPos), MemberPage.class);
     }
 
-    public ApiResponse searchMembers(String guildId, String keyword) {
+    public ApiResponse<MemberPage> searchMembers(String guildId, String keyword) {
         return searchMembers(guildId, keyword, null, null);
     }
 
     /**
      * GET /api/guilds/{guildId}/members/{tinyId}
      */
-    public ApiResponse getMemberInfo(String guildId, String tinyId) {
-        return request("GET", "/guilds/" + segment(guildId) + "/members/" + segment(tinyId), empty());
+    public ApiResponse<UserInfo> getMemberInfo(String guildId, String tinyId) {
+        return request("GET", "/guilds/" + segment(guildId) + "/members/" + segment(tinyId), empty(), UserInfo.class);
     }
 
     /**
      * PUT /api/guilds/{guildId}/members/{tinyId}/mute
      */
-    public ApiResponse muteMember(String guildId, String tinyId, long untilTimestamp) {
-        return request("PUT", "/guilds/" + segment(guildId) + "/members/" + segment(tinyId) + "/mute", params("time_stamp", Long.toString(untilTimestamp)));
+    public ApiResponse<OperationResult> muteMember(String guildId, String tinyId, long untilTimestamp) {
+        return request("PUT", "/guilds/" + segment(guildId) + "/members/" + segment(tinyId) + "/mute", params("time_stamp", Long.toString(untilTimestamp)), OperationResult.class);
     }
 
     /**
      * DELETE /api/guilds/{guildId}/members/{tinyId}
      */
-    public ApiResponse kickMember(String guildId, String tinyId, boolean blacklist, String revokeMsgs) {
-        return request("DELETE", "/guilds/" + segment(guildId) + "/members/" + segment(tinyId), params("blacklist", blacklist, "revoke_msgs", revokeMsgs));
+    public ApiResponse<OperationResult> kickMember(String guildId, String tinyId, boolean blacklist, String revokeMsgs) {
+        return request("DELETE", "/guilds/" + segment(guildId) + "/members/" + segment(tinyId), params("blacklist", blacklist, "revoke_msgs", revokeMsgs), OperationResult.class);
     }
 
-    public ApiResponse kickMember(String guildId, String tinyId) {
+    public ApiResponse<OperationResult> kickMember(String guildId, String tinyId) {
         return kickMember(guildId, tinyId, false, null);
     }
 
     /**
      * POST /api/guilds/{guildId}/admins
      */
-    public ApiResponse addAdmins(String guildId, List<String> tinyIds) {
-        return request("POST", "/guilds/" + segment(guildId) + "/admins", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")));
+    public ApiResponse<OperationResult> addAdmins(String guildId, List<String> tinyIds) {
+        return request("POST", "/guilds/" + segment(guildId) + "/admins", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")), OperationResult.class);
     }
 
     /**
      * DELETE /api/guilds/{guildId}/admins
      */
-    public ApiResponse removeAdmins(String guildId, List<String> tinyIds) {
-        return request("DELETE", "/guilds/" + segment(guildId) + "/admins", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")));
+    public ApiResponse<OperationResult> removeAdmins(String guildId, List<String> tinyIds) {
+        return request("DELETE", "/guilds/" + segment(guildId) + "/admins", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")), OperationResult.class);
     }
 
     /**
      * GET /api/guilds/{guildId}/channels
      */
-    public ApiResponse getChannels(String guildId) {
-        return request("GET", "/guilds/" + segment(guildId) + "/channels", empty());
+    public ApiResponse<ChannelList> getChannels(String guildId) {
+        return request("GET", "/guilds/" + segment(guildId) + "/channels", empty(), ChannelList.class);
     }
 
     /**
      * POST /api/guilds/{guildId}/channels
      */
-    public ApiResponse createChannel(String guildId, String channelName) {
-        return request("POST", "/guilds/" + segment(guildId) + "/channels", params("channel_name", required(channelName, "channelName")));
+    public ApiResponse<OperationResult> createChannel(String guildId, String channelName) {
+        return request("POST", "/guilds/" + segment(guildId) + "/channels", params("channel_name", required(channelName, "channelName")), OperationResult.class);
     }
 
     /**
      * PATCH /api/guilds/{guildId}/channels/{channelId}
      */
-    public ApiResponse updateChannel(String guildId, String channelId, String channelName) {
-        return request("PATCH", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId), params("channel_name", required(channelName, "channelName")));
+    public ApiResponse<OperationResult> updateChannel(String guildId, String channelId, String channelName) {
+        return request("PATCH", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId), params("channel_name", required(channelName, "channelName")), OperationResult.class);
     }
 
     /**
      * DELETE /api/guilds/{guildId}/channels/{channelId}
      */
-    public ApiResponse deleteChannel(String guildId, String channelId) {
-        return request("DELETE", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId), empty());
+    public ApiResponse<OperationResult> deleteChannel(String guildId, String channelId) {
+        return request("DELETE", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId), empty(), OperationResult.class);
     }
 
     /**
      * POST /api/guilds/{guildId}/roles
      */
-    public ApiResponse createRole(String guildId, String name) {
-        return request("POST", "/guilds/" + segment(guildId) + "/roles", params("name", required(name, "name")));
+    public ApiResponse<OperationResult> createRole(String guildId, String name) {
+        return request("POST", "/guilds/" + segment(guildId) + "/roles", params("name", required(name, "name")), OperationResult.class);
     }
 
     /**
      * PATCH /api/guilds/{guildId}/roles/{roleId}
      */
-    public ApiResponse updateRole(String guildId, String roleId, String name) {
-        return request("PATCH", "/guilds/" + segment(guildId) + "/roles/" + segment(roleId), params("name", required(name, "name")));
+    public ApiResponse<OperationResult> updateRole(String guildId, String roleId, String name) {
+        return request("PATCH", "/guilds/" + segment(guildId) + "/roles/" + segment(roleId), params("name", required(name, "name")), OperationResult.class);
     }
 
     /**
      * POST /api/guilds/{guildId}/roles/{roleId}/members
      */
-    public ApiResponse addRoleMembers(String guildId, String roleId, List<String> tinyIds) {
-        return request("POST", "/guilds/" + segment(guildId) + "/roles/" + segment(roleId) + "/members", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")));
+    public ApiResponse<OperationResult> addRoleMembers(String guildId, String roleId, List<String> tinyIds) {
+        return request("POST", "/guilds/" + segment(guildId) + "/roles/" + segment(roleId) + "/members", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")), OperationResult.class);
     }
 
     /**
      * DELETE /api/guilds/{guildId}/roles/{roleId}/members
      */
-    public ApiResponse removeRoleMembers(String guildId, String roleId, List<String> tinyIds) {
-        return request("DELETE", "/guilds/" + segment(guildId) + "/roles/" + segment(roleId) + "/members", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")));
+    public ApiResponse<OperationResult> removeRoleMembers(String guildId, String roleId, List<String> tinyIds) {
+        return request("DELETE", "/guilds/" + segment(guildId) + "/roles/" + segment(roleId) + "/members", params("tiny_ids", nonEmpty(tinyIds, "tinyIds")), OperationResult.class);
     }
 
     /**
      * POST /api/direct-messages
      */
-    public ApiResponse sendDirectMessage(String peerTinyId, String sourceGuildId, String text) {
-        return request("POST", "/direct-messages", params("peer_tiny_id", required(peerTinyId, "peerTinyId"), "source_guild_id", required(sourceGuildId, "sourceGuildId"), "text", required(text, "text")));
+    public ApiResponse<OperationResult> sendDirectMessage(String peerTinyId, String sourceGuildId, String text) {
+        return request("POST", "/direct-messages", params("peer_tiny_id", required(peerTinyId, "peerTinyId"), "source_guild_id", required(sourceGuildId, "sourceGuildId"), "text", required(text, "text")), OperationResult.class);
     }
 
-    public ApiResponse sendDirectMessage(int ref, String text) {
-        return request("POST", "/direct-messages", params("ref", positive(ref), "text", required(text, "text")));
+    public ApiResponse<OperationResult> sendDirectMessage(int ref, String text) {
+        return request("POST", "/direct-messages", params("ref", positive(ref), "text", required(text, "text")), OperationResult.class);
     }
 
     /**
      * GET /api/guilds/{guildId}/feeds
      */
-    public ApiResponse getGuildFeeds(String guildId, Integer getType, Integer count, String feedAttachInfo) {
-        return request("GET", "/guilds/" + segment(guildId) + "/feeds", params("get_type", getType, "count", count, "feed_attach_info", feedAttachInfo));
+    public ApiResponse<FeedPage> getGuildFeeds(String guildId, Integer getType, Integer count, String feedAttachInfo) {
+        return request("GET", "/guilds/" + segment(guildId) + "/feeds", params("get_type", getType, "count", count, "feed_attach_info", feedAttachInfo), FeedPage.class);
     }
 
-    public ApiResponse getGuildFeeds(String guildId) {
+    public ApiResponse<FeedPage> getGuildFeeds(String guildId) {
         return getGuildFeeds(guildId, 2, null, null);
     }
 
     /**
      * GET /api/guilds/{guildId}/feeds/search
      */
-    public ApiResponse searchFeeds(String guildId, String query, String cookie) {
-        return request("GET", "/guilds/" + segment(guildId) + "/feeds/search", params("query", required(query, "query"), "cookie", cookie));
+    public ApiResponse<FeedPage> searchFeeds(String guildId, String query, String cookie) {
+        return request("GET", "/guilds/" + segment(guildId) + "/feeds/search", params("query", required(query, "query"), "cookie", cookie), FeedPage.class);
     }
 
-    public ApiResponse searchFeeds(String guildId, String query) {
+    public ApiResponse<FeedPage> searchFeeds(String guildId, String query) {
         return searchFeeds(guildId, query, null);
     }
 
     /**
      * GET /api/guilds/{guildId}/channels/{channelId}/feeds
      */
-    public ApiResponse getChannelFeeds(String guildId, String channelId, Integer count, String feedAttchInfo) {
-        return request("GET", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId) + "/feeds", params("count", count, "feed_attch_info", feedAttchInfo));
+    public ApiResponse<FeedPage> getChannelFeeds(String guildId, String channelId, Integer count, String feedAttchInfo) {
+        return request("GET", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId) + "/feeds", params("count", count, "feed_attch_info", feedAttchInfo), FeedPage.class);
     }
 
-    public ApiResponse getChannelFeeds(String guildId, String channelId) {
+    public ApiResponse<FeedPage> getChannelFeeds(String guildId, String channelId) {
         return getChannelFeeds(guildId, channelId, null, null);
     }
 
     /**
      * POST /api/guilds/{guildId}/channels/{channelId}/feeds
      */
-    public ApiResponse publishFeed(String guildId, String channelId, FeedContent content) {
-        return request("POST", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId) + "/feeds", json(content));
+    public ApiResponse<OperationResult> publishFeed(String guildId, String channelId, FeedContent content) {
+        return request("POST", "/guilds/" + segment(guildId) + "/channels/" + segment(channelId) + "/feeds", json(content), OperationResult.class);
     }
 
-    public ApiResponse publishFeed(String guildId, String channelId, String content) {
+    public ApiResponse<OperationResult> publishFeed(String guildId, String channelId, String content) {
         return publishFeed(guildId, channelId, new FeedContent(required(content, "content")));
     }
 
     /**
      * POST /api/feeds
      */
-    public ApiResponse publishFeed(FeedContent content) {
-        return request("POST", "/feeds", json(content));
+    public ApiResponse<OperationResult> publishFeed(FeedContent content) {
+        return request("POST", "/feeds", json(content), OperationResult.class);
     }
 
     /**
      * GET /api/feeds/{feedId}
      */
-    public ApiResponse getFeedDetail(String feedId, String guildId, String channelId) {
-        return request("GET", "/feeds/" + segment(feedId), params("guild_id", guildId, "channel_id", channelId));
+    public ApiResponse<Feed> getFeedDetail(String feedId, String guildId, String channelId) {
+        return request("GET", "/feeds/" + segment(feedId), params("guild_id", guildId, "channel_id", channelId), Feed.class);
     }
 
-    public ApiResponse getFeedDetail(String feedId) {
+    public ApiResponse<Feed> getFeedDetail(String feedId) {
         return getFeedDetail(feedId, null, null);
     }
 
     /**
      * PATCH /api/feeds/{feedId}
      */
-    public ApiResponse editFeed(String feedId, String guildId, String channelId, long createTime, FeedContent content) {
-        return request("PATCH", "/feeds/" + segment(feedId), merge(json(content), params("guild_id", required(guildId, "guildId"), "channel_id", required(channelId, "channelId"), "create_time", Long.toString(createTime))));
+    public ApiResponse<OperationResult> editFeed(String feedId, String guildId, String channelId, long createTime, FeedContent content) {
+        return request("PATCH", "/feeds/" + segment(feedId), merge(json(content), params("guild_id", required(guildId, "guildId"), "channel_id", required(channelId, "channelId"), "create_time", Long.toString(createTime))), OperationResult.class);
     }
 
     /**
      * DELETE /api/feeds/{feedId}
      */
-    public ApiResponse deleteFeed(String feedId, String guildId, String channelId, long createTime) {
-        return request("DELETE", "/feeds/" + segment(feedId), params("guild_id", required(guildId, "guildId"), "channel_id", required(channelId, "channelId"), "create_time", Long.toString(createTime)));
+    public ApiResponse<OperationResult> deleteFeed(String feedId, String guildId, String channelId, long createTime) {
+        return request("DELETE", "/feeds/" + segment(feedId), params("guild_id", required(guildId, "guildId"), "channel_id", required(channelId, "channelId"), "create_time", Long.toString(createTime)), OperationResult.class);
     }
 
     /**
      * GET /api/feeds/{feedId}/share-url
      */
-    public ApiResponse getFeedShareUrl(String feedId, String guildId, String channelId) {
-        return request("GET", "/feeds/" + segment(feedId) + "/share-url", params("guild_id", guildId, "channel_id", channelId));
+    public ApiResponse<ShareLink> getFeedShareUrl(String feedId, String guildId, String channelId) {
+        return request("GET", "/feeds/" + segment(feedId) + "/share-url", params("guild_id", guildId, "channel_id", channelId), ShareLink.class);
     }
 
-    public ApiResponse getFeedShareUrl(String feedId) {
+    public ApiResponse<ShareLink> getFeedShareUrl(String feedId) {
         return getFeedShareUrl(feedId, null, null);
     }
 
     /**
      * POST /api/feeds/{feedId}/move
      */
-    public ApiResponse moveFeed(String feedId, String guildId, String originalChannelId, String channelId) {
-        return request("POST", "/feeds/" + segment(feedId) + "/move", params("guild_id", required(guildId, "guildId"), "original_channel_id", required(originalChannelId, "originalChannelId"), "channel_id", required(channelId, "channelId")));
+    public ApiResponse<OperationResult> moveFeed(String feedId, String guildId, String originalChannelId, String channelId) {
+        return request("POST", "/feeds/" + segment(feedId) + "/move", params("guild_id", required(guildId, "guildId"), "original_channel_id", required(originalChannelId, "originalChannelId"), "channel_id", required(channelId, "channelId")), OperationResult.class);
     }
 
     /**
      * GET /api/feeds/{feedId}/comments
      */
-    public ApiResponse getComments(String feedId, CommentsQuery query) {
-        return request("GET", "/feeds/" + segment(feedId) + "/comments", json(query));
+    public ApiResponse<CommentPage> getComments(String feedId, CommentsQuery query) {
+        return request("GET", "/feeds/" + segment(feedId) + "/comments", json(query), CommentPage.class);
     }
 
-    public ApiResponse getComments(String feedId) {
+    public ApiResponse<CommentPage> getComments(String feedId) {
         return getComments(feedId, new CommentsQuery(null, null, null, null, null, null));
     }
 
     /**
      * POST /api/feeds/{feedId}/comments
      */
-    public ApiResponse comment(String feedId, CommentRequest request) {
-        return request("POST", "/feeds/" + segment(feedId) + "/comments", json(request));
+    public ApiResponse<OperationResult> comment(String feedId, CommentRequest request) {
+        return request("POST", "/feeds/" + segment(feedId) + "/comments", json(request), OperationResult.class);
     }
 
     /**
      * DELETE /api/feeds/{feedId}/comments/{commentId}
      */
-    public ApiResponse deleteComment(String feedId, String commentId, CommentDeletion request) {
-        return request("DELETE", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId), json(request));
+    public ApiResponse<OperationResult> deleteComment(String feedId, String commentId, CommentDeletion request) {
+        return request("DELETE", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId), json(request), OperationResult.class);
     }
 
     /**
      * GET /api/feeds/{feedId}/comments/{commentId}/replies
      */
-    public ApiResponse getReplies(String feedId, String commentId, RepliesQuery query) {
-        return request("GET", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/replies", json(query));
+    public ApiResponse<ReplyPage> getReplies(String feedId, String commentId, RepliesQuery query) {
+        return request("GET", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/replies", json(query), ReplyPage.class);
     }
 
     /**
      * POST /api/feeds/{feedId}/comments/{commentId}/replies
      */
-    public ApiResponse reply(String feedId, String commentId, ReplyRequest request) {
-        return request("POST", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/replies", json(request));
+    public ApiResponse<OperationResult> reply(String feedId, String commentId, ReplyRequest request) {
+        return request("POST", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/replies", json(request), OperationResult.class);
     }
 
     /**
      * DELETE /api/feeds/{feedId}/comments/{commentId}/replies/{replyId}
      */
-    public ApiResponse deleteReply(String feedId, String commentId, String replyId, ReplyDeletion request) {
-        return request("DELETE", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/replies/" + segment(replyId), json(request));
+    public ApiResponse<OperationResult> deleteReply(String feedId, String commentId, String replyId, ReplyDeletion request) {
+        return request("DELETE", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/replies/" + segment(replyId), json(request), OperationResult.class);
     }
 
-    public ApiResponse comment(int ref, String content) {
-        return invokeRaw("feed", "do-comment", params("ref", positive(ref), "content", required(content, "content")));
+    public ApiResponse<OperationResult> comment(int ref, String content) {
+        return request("POST", "/commands/feed/do-comment", params("ref", positive(ref), "content", required(content, "content")), OperationResult.class);
     }
 
-    public ApiResponse reply(int ref, String content) {
-        return invokeRaw("feed", "do-reply", params("ref", positive(ref), "content", required(content, "content")));
+    public ApiResponse<OperationResult> reply(int ref, String content) {
+        return request("POST", "/commands/feed/do-reply", params("ref", positive(ref), "content", required(content, "content")), OperationResult.class);
     }
 
     /**
      * PUT /api/feeds/{feedId}/like
      */
-    public ApiResponse likeFeed(String feedId, String guildId, String channelId, boolean like) {
-        return request("PUT", "/feeds/" + segment(feedId) + "/like", params("guild_id", guildId, "channel_id", channelId, "action", like ? 1 : 3));
+    public ApiResponse<OperationResult> likeFeed(String feedId, String guildId, String channelId, boolean like) {
+        return request("PUT", "/feeds/" + segment(feedId) + "/like", params("guild_id", guildId, "channel_id", channelId, "action", like ? 1 : 3), OperationResult.class);
     }
 
-    public ApiResponse likeFeed(String feedId, boolean like) {
+    public ApiResponse<OperationResult> likeFeed(String feedId, boolean like) {
         return likeFeed(feedId, null, null, like);
     }
 
     /**
      * PUT /api/feeds/{feedId}/comments/{commentId}/like
      */
-    public ApiResponse likeCommentOrReply(String feedId, String commentId, LikeRequest request) {
-        return request("PUT", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/like", json(request));
+    public ApiResponse<OperationResult> likeCommentOrReply(String feedId, String commentId, LikeRequest request) {
+        return request("PUT", "/feeds/" + segment(feedId) + "/comments/" + segment(commentId) + "/like", json(request), OperationResult.class);
     }
 
     /**
      * PUT /api/feeds/{feedId}/essence
      */
-    public ApiResponse setFeedEssence(String feedId, boolean enabled) {
-        return request("PUT", "/feeds/" + segment(feedId) + "/essence", params("action", enabled ? 1 : 2));
+    public ApiResponse<OperationResult> setFeedEssence(String feedId, boolean enabled) {
+        return request("PUT", "/feeds/" + segment(feedId) + "/essence", params("action", enabled ? 1 : 2), OperationResult.class);
     }
 
     /**
      * PUT /api/feeds/{feedId}/pin
      */
-    public ApiResponse pinFeed(String feedId, PinRequest request, boolean pinned) {
-        return request("PUT", "/feeds/" + segment(feedId) + "/pin", merge(json(request), params("action", pinned ? 1 : 2)));
+    public ApiResponse<OperationResult> pinFeed(String feedId, PinRequest request, boolean pinned) {
+        return request("PUT", "/feeds/" + segment(feedId) + "/pin", merge(json(request), params("action", pinned ? 1 : 2)), OperationResult.class);
     }
 
     /**
      * POST /api/feeds/{feedId}/essence-notification
      */
-    public ApiResponse pushEssenceNotification(String feedId) {
-        return request("POST", "/feeds/" + segment(feedId) + "/essence-notification", empty());
+    public ApiResponse<OperationResult> pushEssenceNotification(String feedId) {
+        return request("POST", "/feeds/" + segment(feedId) + "/essence-notification", empty(), OperationResult.class);
     }
 
     /**
      * GET /api/notices/interactions
      */
-    public ApiResponse getInteractionNotices(Integer pageNum, String guildId, String attachInfo) {
-        return request("GET", "/notices/interactions", params("page_num", pageNum, "guild_id", guildId, "attach_info", attachInfo));
+    public ApiResponse<NoticePage> getInteractionNotices(Integer pageNum, String guildId, String attachInfo) {
+        return request("GET", "/notices/interactions", params("page_num", pageNum, "guild_id", guildId, "attach_info", attachInfo), NoticePage.class);
     }
 
-    public ApiResponse getInteractionNotices() {
+    public ApiResponse<NoticePage> getInteractionNotices() {
         return getInteractionNotices(null, null, null);
     }
 
     /**
      * GET /api/notices/status
      */
-    public ApiResponse getNoticeStatus() {
-        return request("GET", "/notices/status", empty());
+    public ApiResponse<NoticeStatus> getNoticeStatus() {
+        return request("GET", "/notices/status", empty(), NoticeStatus.class);
     }
 
     /**
      * GET /api/notices/recent
      */
-    public ApiResponse getRecentNotices() {
-        return request("GET", "/notices/recent", empty());
+    public ApiResponse<NoticePage> getRecentNotices() {
+        return request("GET", "/notices/recent", empty(), NoticePage.class);
     }
 
     /**
      * POST /api/notices/check
      */
-    public ApiResponse checkNotices() {
-        return request("POST", "/notices/check", empty());
+    public ApiResponse<NoticePage> checkNotices() {
+        return request("POST", "/notices/check", empty(), NoticePage.class);
     }
 
     /**
      * POST /api/notices/decisions
      */
-    public ApiResponse dealNotice(String noticeId, boolean agree) {
-        return request("POST", "/notices/decisions", params("notice_id", required(noticeId, "noticeId"), "action_id", agree ? "agree" : "refuse"));
+    public ApiResponse<OperationResult> dealNotice(String noticeId, boolean agree) {
+        return request("POST", "/notices/decisions", params("notice_id", required(noticeId, "noticeId"), "action_id", agree ? "agree" : "refuse"), OperationResult.class);
     }
 
-    public ApiResponse dealNotice(int ref, boolean agree) {
-        return request("POST", "/notices/decisions", params("ref", positive(ref), "action_id", agree ? "agree" : "refuse"));
+    public ApiResponse<OperationResult> dealNotice(int ref, boolean agree) {
+        return request("POST", "/notices/decisions", params("ref", positive(ref), "action_id", agree ? "agree" : "refuse"), OperationResult.class);
     }
 
     /**
      * GET /api/operations
      */
-    public ApiResponse getOperations() {
-        return request("GET", "/operations", empty());
+    public ApiResponse<List<OperationDescription>> getOperations() {
+        return request("GET", "/operations", empty(), new TypeToken<List<OperationDescription>>() {}.getType());
     }
 
     /**
      * GET /api/cli/version
      */
-    public ApiResponse getCliVersion() {
-        return request("GET", "/cli/version", empty());
+    public ApiResponse<CliVersion> getCliVersion() {
+        return request("GET", "/cli/version", empty(), CliVersion.class);
     }
 
     /**
      * Pass a typed request record for an advanced atomic operation.
      */
-    public ApiResponse invoke(String domain, String action, Record parameters) {
-        return invokeRaw(domain, action, json(parameters));
+    public <T> ApiResponse<T> invoke(String domain, String action, Record parameters, Class<T> resultType) {
+        return request("POST", "/commands/" + segment(domain) + "/" + segment(action), json(parameters),
+                Objects.requireNonNull(resultType, "resultType"));
     }
 
     /**
      * Escape hatch for new/undocumented CLI fields; normal operations use typed methods.
      */
-    public ApiResponse invokeRaw(String domain, String action, JsonObject parameters) {
-        return request("POST", "/commands/" + segment(domain) + "/" + segment(action), Objects.requireNonNull(parameters, "parameters").deepCopy());
+    public ApiResponse<JsonElement> invokeRaw(String domain, String action, JsonObject parameters) {
+        return request("POST", "/commands/" + segment(domain) + "/" + segment(action), Objects.requireNonNull(parameters, "parameters").deepCopy(), JsonElement.class);
     }
 
-    public ApiResponse getSchema(String domain, String action) {
-        return request("GET", "/commands/" + segment(domain) + "/" + segment(action) + "/schema", empty());
+    public ApiResponse<CommandSchema> getSchema(String domain, String action) {
+        return request("GET", "/commands/" + segment(domain) + "/" + segment(action) + "/schema", empty(), CommandSchema.class);
     }
 
-    private ApiResponse request(String method, String path, JsonObject input) {
+    private <T> ApiResponse<T> request(String method, String path, JsonObject input, Type resultType) {
         for (String key : input.keySet()) {
             if (!key.matches("[a-z][a-z0-9_]*") || key.equals("confirm")) {
                 throw new IllegalArgumentException("Business parameters must use snake_case; use withOptions for confirm/dryRun");
@@ -672,7 +676,28 @@ public final class QChannelBridgeClient {
             }
             throw new QcbApiException(message, response.statusCode(), code, decoded, null);
         }
-        return new ApiResponse(true, message, data == null ? JsonNull.INSTANCE : data);
+        JsonElement payload = data;
+        if (data != null && data.isJsonObject()) {
+            JsonObject cli = data.getAsJsonObject();
+            if (cli.has("success") && cli.get("success").isJsonPrimitive()
+                    && cli.get("success").getAsJsonPrimitive().isBoolean()) {
+                payload = cli.has("data") ? cli.get("data") : JsonNull.INSTANCE;
+            }
+        }
+        try {
+            Preview preview = null;
+            if (payload != null && payload.isJsonObject()
+                    && new JsonPrimitive(true).equals(payload.getAsJsonObject().get("dry_run"))) {
+                preview = ResponseParser.read(payload, Preview.class);
+            }
+            T result = preview == null ? ResponseParser.read(payload, resultType) : null;
+            return new ApiResponse<>(true, message, result, preview,
+                    ResponseParser.hint(data, payload, "setup_hint"),
+                    ResponseParser.hint(data, payload, "subscribe_hint"), decoded);
+        } catch (JsonParseException | IllegalStateException e) {
+            throw new QcbApiException("Cannot decode QChannelBridge result as " + resultType.getTypeName(),
+                    response.statusCode(), null, decoded, e);
+        }
     }
 }
 

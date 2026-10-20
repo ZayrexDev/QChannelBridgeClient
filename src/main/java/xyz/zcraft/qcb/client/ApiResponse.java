@@ -1,14 +1,13 @@
 package xyz.zcraft.qcb.client;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import xyz.zcraft.qcb.client.response.Hint;
+import xyz.zcraft.qcb.client.response.Preview;
 
-public record ApiResponse(boolean success, String message, JsonElement data) {
-    public JsonElement result() {
-        if (data != null && data.isJsonObject()) {
-            JsonObject object = data.getAsJsonObject();
-            if (object.has("success") && object.has("data")) return object.get("data");
-        }
+/** data is the unwrapped business result; raw retains the complete bridge response. */
+public record ApiResponse<T>(boolean success, String message, T data, Preview preview,
+                             Hint setupHint, Hint subscribeHint, JsonElement raw) {
+    public T result() {
         return data;
     }
 }

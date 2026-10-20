@@ -1,0 +1,65 @@
+{
+  "data": {
+    "attach_info": "fixture",
+    "comments": [
+      {
+        "author": "fixture",
+        "author_id": "18446744073709551615",
+        "comment_id": "18446744073709551615",
+        "comment_index": 1,
+        "content": {
+          "at_users": [],
+          "images": [],
+          "sticker": null,
+          "text": "fixture"
+        },
+        "content_text": "fixture",
+        "create_time": "2026-10-20 12:00:00",
+        "create_time_raw": 1,
+        "has_more_replies": false,
+        "like_count": 1,
+        "reply_count": 0
+      },
+      {
+        "attach_info": "fixture",
+        "author": "fixture",
+        "author_id": "18446744073709551615",
+        "comment_id": "18446744073709551615",
+        "comment_index": 1,
+        "content": {
+          "at_users": [],
+          "images": [],
+          "sticker": null,
+          "text": "fixture"
+        },
+        "content_text": "fixture",
+        "create_time": "2026-10-20 12:00:00",
+        "create_time_raw": 1,
+        "has_more_replies": true,
+        "like_count": 0,
+        "replies_preview": [
+          {
+            "author": "fixture",
+            "author_id": "18446744073709551615",
+            "content": {
+              "at_users": [],
+              "images": [],
+              "sticker": null,
+              "text": "fixture"
+            },
+            "create_time": "2026-10-20 12:00:00",
+            "create_time_raw": 1,
+            "reply_id": "18446744073709551615",
+            "target_reply_id": "18446744073709551615",
+            "target_user": "fixture",
+            "target_user_id": "18446744073709551615"
+          }
+        ],
+        "reply_count": 1
+      }
+    ],
+    "guild_id": "18446744073709551615",
+    "has_more": true
+  },
+  "success": true
+}

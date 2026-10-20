@@ -1,0 +1,19 @@
+{
+  "data": {
+    "channels": [
+      {
+        "channel_id": "18446744073709551615",
+        "channel_name": "fixture",
+        "guild_id": "18446744073709551615"
+      },
+      {
+        "channel_id": "18446744073709551615",
+        "channel_name": "fixture",
+        "guild_id": "18446744073709551615"
+      }
+    ],
+    "count": 1,
+    "guild_id": "18446744073709551615"
+  },
+  "success": true
+}

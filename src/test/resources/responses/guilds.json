@@ -1,0 +1,27 @@
+{
+  "data": {
+    "created_guilds": null,
+    "joined_guilds": [
+      {
+        "guild_id": "18446744073709551615",
+        "guild_number": "18446744073709551615",
+        "member_count": 1,
+        "name": "fixture",
+        "role": "fixture",
+        "share_url": "https://example.com/fixture"
+      }
+    ],
+    "managed_guilds": [
+      {
+        "guild_id": "18446744073709551615",
+        "guild_number": "18446744073709551615",
+        "member_count": 1,
+        "name": "fixture",
+        "role": "fixture",
+        "share_url": "https://example.com/fixture"
+      }
+    ],
+    "total_count": 1
+  },
+  "success": true
+}

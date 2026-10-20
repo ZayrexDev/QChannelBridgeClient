@@ -1,0 +1,11 @@
+{
+  "data": {
+    "country": "fixture",
+    "gender": "fixture",
+    "global_nickname": "fixture",
+    "member_name": "fixture",
+    "nickname": "fixture",
+    "province": "fixture"
+  },
+  "success": true
+}

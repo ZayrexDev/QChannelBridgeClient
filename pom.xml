@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.BotSeira</groupId>
+    <groupId>com.github.ZayrexDev</groupId>
     <artifactId>QChannelBridgeClient</artifactId>
-    <version>1.0.0</version>
+    <version>v1.0.2</version>
     <name>QChannelBridge Java Client</name>
     <description>Java client for the QChannelBridge REST API</description>
 

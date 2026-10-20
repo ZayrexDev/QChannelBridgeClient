@@ -1,0 +1,38 @@
+{
+  "data": {
+    "feed_attach_info": "fixture",
+    "feeds": [
+      {
+        "author": "fixture",
+        "author_id": "18446744073709551615",
+        "channel_name": "fixture",
+        "comment_count": 0,
+        "content_snippet": "fixture",
+        "create_time": "2026-10-20 12:00:00",
+        "create_time_raw": 1,
+        "feed_id": "18446744073709551615",
+        "guild_name": "fixture",
+        "images": [
+          "fixture"
+        ],
+        "prefer_count": 0,
+        "title": "fixture"
+      },
+      {
+        "author": "fixture",
+        "author_id": "18446744073709551615",
+        "channel_name": "fixture",
+        "comment_count": 1,
+        "content_snippet": "fixture",
+        "create_time": "2026-10-20 12:00:00",
+        "create_time_raw": 1,
+        "feed_id": "18446744073709551615",
+        "guild_name": "fixture",
+        "prefer_count": 1,
+        "title": "fixture"
+      }
+    ],
+    "has_more": true
+  },
+  "success": true
+}

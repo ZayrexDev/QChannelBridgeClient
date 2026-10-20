@@ -1,0 +1,18 @@
+{
+  "data": {
+    "channels": [
+      {
+        "guild_id": "18446744073709551615",
+        "guild_number": "18446744073709551615",
+        "member_count": 1,
+        "name": "fixture",
+        "profile": "fixture",
+        "share_url": "https://example.com/fixture"
+      }
+    ],
+    "has_more": true,
+    "isEnd": 1,
+    "next_page_token": "fixture"
+  },
+  "success": true
+}

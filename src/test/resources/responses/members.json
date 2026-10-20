@@ -1,0 +1,55 @@
+{
+  "data": {
+    "admins": [
+      {
+        "role": "fixture",
+        "tinyid": "18446744073709551615",
+        "加入时间": "fixture",
+        "昵称": "fixture"
+      }
+    ],
+    "ai_members": null,
+    "has_more": false,
+    "members": [
+      {
+        "role": "fixture",
+        "tinyid": "18446744073709551615",
+        "加入时间": "fixture",
+        "性别": "fixture",
+        "昵称": "fixture"
+      },
+      {
+        "role": "fixture",
+        "tinyid": "18446744073709551615",
+        "加入时间": "fixture",
+        "昵称": "fixture"
+      }
+    ],
+    "owners": [
+      {
+        "role": "fixture",
+        "tinyid": "18446744073709551615",
+        "加入时间": "fixture",
+        "性别": "fixture",
+        "昵称": "fixture"
+      }
+    ],
+    "robots": [
+      {
+        "role": "fixture",
+        "tinyid": "18446744073709551615",
+        "加入时间": "fixture",
+        "昵称": "fixture"
+      },
+      {
+        "role": "fixture",
+        "tinyid": "18446744073709551615",
+        "加入时间": "fixture",
+        "昵称": "fixture"
+      }
+    ],
+    "total_fetched": 1,
+    "total_fetched_note": "fixture"
+  },
+  "success": true
+}
