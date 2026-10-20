@@ -1,0 +1,926 @@
+[
+  {
+    "name": "getGuilds",
+    "method": "GET",
+    "path": "/guilds",
+    "parameters": []
+  },
+  {
+    "name": "createGuild",
+    "method": "POST",
+    "path": "/guilds",
+    "parameters": [
+      {
+        "type": "CreateGuildRequest",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "searchGuilds",
+    "method": "GET",
+    "path": "/guilds/search",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "keyword"
+      },
+      {
+        "type": "String",
+        "name": "scope"
+      },
+      {
+        "type": "String",
+        "name": "nextPageToken"
+      }
+    ]
+  },
+  {
+    "name": "resolveShare",
+    "method": "GET",
+    "path": "/shares/resolve",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "url"
+      }
+    ]
+  },
+  {
+    "name": "getUserInfo",
+    "method": "GET",
+    "path": "/users/{tinyId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "tinyId"
+      }
+    ]
+  },
+  {
+    "name": "getGuildInfo",
+    "method": "GET",
+    "path": "/guilds/{guildId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      }
+    ]
+  },
+  {
+    "name": "updateGuildInfo",
+    "method": "PATCH",
+    "path": "/guilds/{guildId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "guildName"
+      },
+      {
+        "type": "String",
+        "name": "guildProfile"
+      }
+    ]
+  },
+  {
+    "name": "updateGuildAvatar",
+    "method": "PUT",
+    "path": "/guilds/{guildId}/avatar",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "imagePath"
+      }
+    ]
+  },
+  {
+    "name": "updateGuildNumber",
+    "method": "PUT",
+    "path": "/guilds/{guildId}/number",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "guildNumber"
+      }
+    ]
+  },
+  {
+    "name": "getGuildShareUrl",
+    "method": "GET",
+    "path": "/guilds/{guildId}/share-url",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      }
+    ]
+  },
+  {
+    "name": "getJoinSettings",
+    "method": "GET",
+    "path": "/guilds/{guildId}/join-settings",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      }
+    ]
+  },
+  {
+    "name": "updateJoinSettings",
+    "method": "PUT",
+    "path": "/guilds/{guildId}/join-settings",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "JoinSettings",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "joinGuild",
+    "method": "POST",
+    "path": "/guilds/{guildId}/membership",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "JoinGuildRequest",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "leaveGuild",
+    "method": "DELETE",
+    "path": "/guilds/{guildId}/membership",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      }
+    ]
+  },
+  {
+    "name": "getMembers",
+    "method": "GET",
+    "path": "/guilds/{guildId}/members",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "nextPageToken"
+      }
+    ]
+  },
+  {
+    "name": "searchMembers",
+    "method": "GET",
+    "path": "/guilds/{guildId}/members/search",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "keyword"
+      },
+      {
+        "type": "Integer",
+        "name": "num"
+      },
+      {
+        "type": "String",
+        "name": "nextPos"
+      }
+    ]
+  },
+  {
+    "name": "getMemberInfo",
+    "method": "GET",
+    "path": "/guilds/{guildId}/members/{tinyId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "tinyId"
+      }
+    ]
+  },
+  {
+    "name": "muteMember",
+    "method": "PUT",
+    "path": "/guilds/{guildId}/members/{tinyId}/mute",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "tinyId"
+      },
+      {
+        "type": "long",
+        "name": "untilTimestamp"
+      }
+    ]
+  },
+  {
+    "name": "kickMember",
+    "method": "DELETE",
+    "path": "/guilds/{guildId}/members/{tinyId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "tinyId"
+      },
+      {
+        "type": "boolean",
+        "name": "blacklist"
+      },
+      {
+        "type": "String",
+        "name": "revokeMsgs"
+      }
+    ]
+  },
+  {
+    "name": "addAdmins",
+    "method": "POST",
+    "path": "/guilds/{guildId}/admins",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "List<String>",
+        "name": "tinyIds"
+      }
+    ]
+  },
+  {
+    "name": "removeAdmins",
+    "method": "DELETE",
+    "path": "/guilds/{guildId}/admins",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "List<String>",
+        "name": "tinyIds"
+      }
+    ]
+  },
+  {
+    "name": "getChannels",
+    "method": "GET",
+    "path": "/guilds/{guildId}/channels",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      }
+    ]
+  },
+  {
+    "name": "createChannel",
+    "method": "POST",
+    "path": "/guilds/{guildId}/channels",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelName"
+      }
+    ]
+  },
+  {
+    "name": "updateChannel",
+    "method": "PATCH",
+    "path": "/guilds/{guildId}/channels/{channelId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      },
+      {
+        "type": "String",
+        "name": "channelName"
+      }
+    ]
+  },
+  {
+    "name": "deleteChannel",
+    "method": "DELETE",
+    "path": "/guilds/{guildId}/channels/{channelId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      }
+    ]
+  },
+  {
+    "name": "createRole",
+    "method": "POST",
+    "path": "/guilds/{guildId}/roles",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "name"
+      }
+    ]
+  },
+  {
+    "name": "updateRole",
+    "method": "PATCH",
+    "path": "/guilds/{guildId}/roles/{roleId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "roleId"
+      },
+      {
+        "type": "String",
+        "name": "name"
+      }
+    ]
+  },
+  {
+    "name": "addRoleMembers",
+    "method": "POST",
+    "path": "/guilds/{guildId}/roles/{roleId}/members",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "roleId"
+      },
+      {
+        "type": "List<String>",
+        "name": "tinyIds"
+      }
+    ]
+  },
+  {
+    "name": "removeRoleMembers",
+    "method": "DELETE",
+    "path": "/guilds/{guildId}/roles/{roleId}/members",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "roleId"
+      },
+      {
+        "type": "List<String>",
+        "name": "tinyIds"
+      }
+    ]
+  },
+  {
+    "name": "sendDirectMessage",
+    "method": "POST",
+    "path": "/direct-messages",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "peerTinyId"
+      },
+      {
+        "type": "String",
+        "name": "sourceGuildId"
+      },
+      {
+        "type": "String",
+        "name": "text"
+      }
+    ]
+  },
+  {
+    "name": "getGuildFeeds",
+    "method": "GET",
+    "path": "/guilds/{guildId}/feeds",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "Integer",
+        "name": "getType"
+      },
+      {
+        "type": "Integer",
+        "name": "count"
+      },
+      {
+        "type": "String",
+        "name": "feedAttachInfo"
+      }
+    ]
+  },
+  {
+    "name": "searchFeeds",
+    "method": "GET",
+    "path": "/guilds/{guildId}/feeds/search",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "query"
+      },
+      {
+        "type": "String",
+        "name": "cookie"
+      }
+    ]
+  },
+  {
+    "name": "getChannelFeeds",
+    "method": "GET",
+    "path": "/guilds/{guildId}/channels/{channelId}/feeds",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      },
+      {
+        "type": "Integer",
+        "name": "count"
+      },
+      {
+        "type": "String",
+        "name": "feedAttchInfo"
+      }
+    ]
+  },
+  {
+    "name": "publishFeed",
+    "method": "POST",
+    "path": "/guilds/{guildId}/channels/{channelId}/feeds",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      },
+      {
+        "type": "FeedContent",
+        "name": "content"
+      }
+    ]
+  },
+  {
+    "name": "publishFeed",
+    "method": "POST",
+    "path": "/feeds",
+    "parameters": [
+      {
+        "type": "FeedContent",
+        "name": "content"
+      }
+    ]
+  },
+  {
+    "name": "getFeedDetail",
+    "method": "GET",
+    "path": "/feeds/{feedId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      }
+    ]
+  },
+  {
+    "name": "editFeed",
+    "method": "PATCH",
+    "path": "/feeds/{feedId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      },
+      {
+        "type": "long",
+        "name": "createTime"
+      },
+      {
+        "type": "FeedContent",
+        "name": "content"
+      }
+    ]
+  },
+  {
+    "name": "deleteFeed",
+    "method": "DELETE",
+    "path": "/feeds/{feedId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      },
+      {
+        "type": "long",
+        "name": "createTime"
+      }
+    ]
+  },
+  {
+    "name": "getFeedShareUrl",
+    "method": "GET",
+    "path": "/feeds/{feedId}/share-url",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      }
+    ]
+  },
+  {
+    "name": "moveFeed",
+    "method": "POST",
+    "path": "/feeds/{feedId}/move",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "originalChannelId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      }
+    ]
+  },
+  {
+    "name": "getComments",
+    "method": "GET",
+    "path": "/feeds/{feedId}/comments",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "CommentsQuery",
+        "name": "query"
+      }
+    ]
+  },
+  {
+    "name": "comment",
+    "method": "POST",
+    "path": "/feeds/{feedId}/comments",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "CommentRequest",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "deleteComment",
+    "method": "DELETE",
+    "path": "/feeds/{feedId}/comments/{commentId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "commentId"
+      },
+      {
+        "type": "CommentDeletion",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "getReplies",
+    "method": "GET",
+    "path": "/feeds/{feedId}/comments/{commentId}/replies",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "commentId"
+      },
+      {
+        "type": "RepliesQuery",
+        "name": "query"
+      }
+    ]
+  },
+  {
+    "name": "reply",
+    "method": "POST",
+    "path": "/feeds/{feedId}/comments/{commentId}/replies",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "commentId"
+      },
+      {
+        "type": "ReplyRequest",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "deleteReply",
+    "method": "DELETE",
+    "path": "/feeds/{feedId}/comments/{commentId}/replies/{replyId}",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "commentId"
+      },
+      {
+        "type": "String",
+        "name": "replyId"
+      },
+      {
+        "type": "ReplyDeletion",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "likeFeed",
+    "method": "PUT",
+    "path": "/feeds/{feedId}/like",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "channelId"
+      },
+      {
+        "type": "boolean",
+        "name": "like"
+      }
+    ]
+  },
+  {
+    "name": "likeCommentOrReply",
+    "method": "PUT",
+    "path": "/feeds/{feedId}/comments/{commentId}/like",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "String",
+        "name": "commentId"
+      },
+      {
+        "type": "LikeRequest",
+        "name": "request"
+      }
+    ]
+  },
+  {
+    "name": "setFeedEssence",
+    "method": "PUT",
+    "path": "/feeds/{feedId}/essence",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "boolean",
+        "name": "enabled"
+      }
+    ]
+  },
+  {
+    "name": "pinFeed",
+    "method": "PUT",
+    "path": "/feeds/{feedId}/pin",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      },
+      {
+        "type": "PinRequest",
+        "name": "request"
+      },
+      {
+        "type": "boolean",
+        "name": "pinned"
+      }
+    ]
+  },
+  {
+    "name": "pushEssenceNotification",
+    "method": "POST",
+    "path": "/feeds/{feedId}/essence-notification",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "feedId"
+      }
+    ]
+  },
+  {
+    "name": "getInteractionNotices",
+    "method": "GET",
+    "path": "/notices/interactions",
+    "parameters": [
+      {
+        "type": "Integer",
+        "name": "pageNum"
+      },
+      {
+        "type": "String",
+        "name": "guildId"
+      },
+      {
+        "type": "String",
+        "name": "attachInfo"
+      }
+    ]
+  },
+  {
+    "name": "getNoticeStatus",
+    "method": "GET",
+    "path": "/notices/status",
+    "parameters": []
+  },
+  {
+    "name": "getRecentNotices",
+    "method": "GET",
+    "path": "/notices/recent",
+    "parameters": []
+  },
+  {
+    "name": "checkNotices",
+    "method": "POST",
+    "path": "/notices/check",
+    "parameters": []
+  },
+  {
+    "name": "dealNotice",
+    "method": "POST",
+    "path": "/notices/decisions",
+    "parameters": [
+      {
+        "type": "String",
+        "name": "noticeId"
+      },
+      {
+        "type": "boolean",
+        "name": "agree"
+      }
+    ]
+  },
+  {
+    "name": "getOperations",
+    "method": "GET",
+    "path": "/operations",
+    "parameters": []
+  },
+  {
+    "name": "getCliVersion",
+    "method": "GET",
+    "path": "/cli/version",
+    "parameters": []
+  }
+]
